@@ -8,8 +8,8 @@
 ;;;
 ;;; Update:  Thu 25 Jan 2018 08:48:59 GMT
 ;;;
-;;; Purpose: Automatically turn a single pitch into a chord baring in mind
-;;;          the instruments set-limits and playing range.
+;;; Purpose: Automatically turn a single pitch into a chord bearing
+;;;          in mind the instruments set-limits and playing range.
 ;;;          You can even specify the chord function
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
