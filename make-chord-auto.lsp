@@ -6,10 +6,10 @@
 ;;;
 ;;; Date:    25 January 2018
 ;;;
-;;; Update:  Mon 19 Feb 2018 15:01:39 GMT
+;;; Update:  Mon 19 Feb 2018 15:02:40 GMT
 ;;;
 ;;; Purpose: Automatically turn a single pitch into a chord bearing
-;;;          in mind the instruments set-limits and playing range.
+;;;          in mind the instrument's set-limits and playing range.
 ;;;          You can even specify the chord function
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
