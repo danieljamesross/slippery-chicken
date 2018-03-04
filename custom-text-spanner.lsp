@@ -33,10 +33,9 @@
   custom-text)
 
 (defmethod custom-spanner-start ((sc slippery-chicken) start-bar-num start-event
-				 player custom-text
-				 &optional (line-style 'line))
+				 player custom-text &optional line-style)
   (let ((bmt (format nil "\\once \\dynamicUp \\override TextSpanner.bound-details.left.text = \\markup { \\small \\italic \\bold ~a } \\override TextSpanner.style = #'~a"
-		     custom-text line-style)))
+		     custom-text (string-downcase line-style))))
     (print bmt)
     (add-mark-above-staff-lp sc start-bar-num start-event player
 			 '(text "\\startTextSpan")
@@ -49,6 +48,8 @@
 ;;; Example
 
 #|
+(progn
+
 (make-slippery-chicken  
  '+your-title-here+ 
  :title "Your Title Here" 
@@ -114,9 +115,9 @@
    (2 ((flt (seq1 seq1 seq2 seq1))
        (clr (seq1 seq1 seq2 seq1))))))
 
-(custom-text-spanner +your-title-here+  4 1 7 3 'flt "rit" :line-style 'dotted-line)
+(custom-text-spanner +your-title-here+  4 1 7 3 'flt "rit" :line-style 'zigzag)
 
-(lp-display +your-title-here+ :base-path "/tmp/")
+(lp-display +your-title-here+ :base-path "/tmp/"))
 
 |#
 
