@@ -14,7 +14,7 @@
 ;;;          e.g. accel.--------------
 ;;;          e.g. trill~~~~~~~~~~~~~~~
 ;;;          Requires add-mark-above-staff-lp.lsp
-;;;          https://github.com/danieljamesross/slippery-chicken/add-mark-above-staff-lp.lsp
+;;;          https://github.com/danieljamesross/slippery-chicken/blob/master/add-mark-above-staff-lp.lsp
 ;;;          NB: Lilypond only!
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
