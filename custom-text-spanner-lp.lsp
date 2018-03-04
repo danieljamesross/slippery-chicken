@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; File:    custom-text-spanner.lsp
+;;; File:    custom-text-spanner-lp.lsp
 ;;;
 ;;; Author:  Daniel James Ross (mr.danielross@gmail.com)
 ;;;
@@ -22,7 +22,7 @@
 
 (in-package :sc)
 
-(defmethod custom-text-spanner ((sc slippery-chicken) start-bar-num start-event
+(defmethod custom-text-spanner-lp ((sc slippery-chicken) start-bar-num start-event
 				end-bar-num end-event player custom-text
 				&key
 				  ;; line, zigzag, dotted-line,
@@ -116,7 +116,7 @@
    (2 ((flt (seq1 seq1 seq2 seq1))
        (clr (seq1 seq1 seq2 seq1))))))
 
-(custom-text-spanner +your-title-here+  4 1 7 3 'flt "rit" :line-style 'zigzag)
+(custom-text-spanner-lp +your-title-here+  4 1 7 3 'flt "rit" :line-style 'zigzag)
 
 (lp-display +your-title-here+ :base-path "/tmp/"))
 
@@ -124,4 +124,4 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; eof add-mark-above-staff-lp.lsp
+;;; eof custom-text-spanner-lp.lsp
