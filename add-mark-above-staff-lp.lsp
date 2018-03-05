@@ -15,10 +15,13 @@
 
 (in-package :sc)
 
-(defmethod add-mark-above-staff-lp ((sc slippery-chicken) bar-num event player mark
-				    &key (before-mark-event '(text "\\once \\dynamicUp "))
-				      (make-italic nil) ; strings only
-				      (make-bold nil)) ; strings only
+(defmethod add-mark-above-staff-lp ((sc slippery-chicken) bar-num event
+				    player mark
+				    &key
+				      (before-mark-event
+				       '(text "\\once \\dynamicUp "))
+				      (make-italic nil) ; effects strings only
+				      (make-bold nil)) ; ditto
 				      
   (let* ((ev (get-event sc bar-num event player)))
     (add-mark-before ev before-mark-event)
@@ -64,7 +67,8 @@
 (add-mark-above-staff-lp +mini+ 3 1 'vn 'ff)
 (add-mark-above-staff-lp +mini+ 3 3 'vn "italic" :make-italic t)
 (add-mark-above-staff-lp +mini+ 2 2 'vn "bold" :make-bold t)
-(add-mark-above-staff-lp +mini+ 1 2 'vn "bold italic" :make-bold t :make-italic t)
+(add-mark-above-staff-lp +mini+ 1 2 'vn "bold italic" 
+			 :make-bold t :make-italic t)
 
 (add-mark-above-staff-lp +mini+ 4 1 'vn 'pp)
 
