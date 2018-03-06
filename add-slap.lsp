@@ -8,7 +8,7 @@
 ;;;
 ;;; Date:     Tue  6 Mar 2018 12:41:57 GMT
 ;;;
-;;; Purpose:  Change notehead to slap notation (i.e. <)
+;;; Purpose:  Change notehead to slap notation (i.e. >)
 ;;;           NB: Lilypond only!
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
