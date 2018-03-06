@@ -6,9 +6,9 @@
 ;;;
 ;;; Date:    25 January 2018
 ;;;
-;;; Update:  Mon 19 Feb 2018 15:02:40 GMT
+;;; Update:  Tue  6 Mar 2018 12:47:25 GMT
 ;;;
-;;; Purpose: Automatically turn a single pitch into a chord bearing
+;;; PURPOSE: Automatically turn a single pitch into a chord bearing
 ;;;          in mind the instrument's set-limits and playing range.
 ;;;          You can even specify the chord function
 ;;;
@@ -43,9 +43,17 @@
 		   (slh (get-set-limit-high sc instrument (if (zerop (nth-seq bar))
 							      1 (nth-seq bar))))
 		   (refz (get-data-data sr (set-palette sc)))
-		   (pcurve (flatten (pitch-curve (get-sequenz-from-bar-num
-						  (piece sc) bar-num instrument))))
+		   (gsfbn (get-sequenz-from-bar-num (piece sc) bar-num instrument)) 
+		   pcurve
 		   (new-pitches))
+	      (unless refz
+		(error "~%make-chord-auto: ~%No set-ref for: ~a, event: ~a, bar: ~a"
+		       instrument (1+ (bar-pos ev))(bar-num ev)))
+	      (when gsfbn
+		(setq pcurve (flatten
+			      (pitch-curve
+			       (get-sequenz-from-bar-num
+				(piece sc) bar-num instrument)))))
 	      ;; Account for set-limits low...
 	      (unless sll (setq sll (lowest-sounding
 				     (player-get-instrument
@@ -60,8 +68,11 @@
 			    collect p)
 		    new-pitches (funcall chord-fun 1
 					 (if pcurve 
-					     (nth (bar-pos ev) pcurve) 1)
-					 refz 1 instrument 1))
+					     (nth (bar-pos ev) pcurve)
+					     ;; otherwise all chords are the same
+					     (1+ (random 4)))
+					 (if refz refz 1)
+					 1 instrument 1))
 	      ;; Account for ties later
 	      (when (is-tied-to ev) (setf tt t))
 	      (when (is-tied-from ev) (setf tf t))
