@@ -43,9 +43,9 @@
 (setf *read-default-float-format* 'single-float)
 ;;; You must compile and load butterworth before doing the same with this ins;
 ;;; loading alone is not enough, e.g.
-(load (compile-file "/Applications/slippery-chicken-OSX.app/Contents/Resources/clm-4/butterworth.cl"))
+;(load (compile-file "/Applications/slippery-chicken-OSX.app/Contents/Resources/clm-4/butterworth.cl"))
 
-(definstrument samp2
+(defscins samp2
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; Beginning of Instrument Parameters
@@ -159,7 +159,10 @@
                            (floor (* *srate* start))))
          ;; Input File End Sample
          (end-sample (if (zerop end)
-                         (sound-frames file)
+			 ;; DJR Tue 20 Mar 2018 16:27:29 GMT
+			 ;; sound-frames throws an error in clm-5
+			 ;; so let's get rid of it.
+                         ;(sound-frames file)
                          (floor (* *srate* end))))
          ;; The duration (seconds) of the input file, taking into consideration
          ;; whether we're reflecting or not. 
