@@ -6,7 +6,7 @@
 ;;;
 ;;; Date:    25 January 2018
 ;;;
-;;; Update:  Tue  6 Mar 2018 12:47:25 GMT
+;;; Update:  Tue 6 Mar 2018 12:47:25 GMT
 ;;;
 ;;; PURPOSE: Automatically turn a single pitch into a chord bearing
 ;;;          in mind the instrument's set-limits and playing range.
@@ -26,10 +26,12 @@
 	 (bar (get-bar sc bar-num instrument))
 	 (sr (set-ref ev))
 	 (dyn (get-dynamic ev))
+	 (mc (midi-channel (pitch-or-chord ev)))
 	 (mrks (marks ev))
 	 (mrks-b4 (marks-before ev))
 	 (tt)
-	 (tf))
+	 (tf)
+	 (cl (make-cscl '(1 2 3 4))))
     (if (is-chord ev)
 	(format t "~%WARNING! make-chord-auto:~%event is a chord already: bar ~a, event ~a"
 		bar-num event)
@@ -49,11 +51,11 @@
 	      (unless refz
 		(error "~%make-chord-auto: ~%No set-ref for: ~a, event: ~a, bar: ~a"
 		       instrument (1+ (bar-pos ev))(bar-num ev)))
-	      (when gsfbn
+	      (if gsfbn
 		(setq pcurve (flatten
 			      (pitch-curve
-			       (get-sequenz-from-bar-num
-				(piece sc) bar-num instrument)))))
+			       gsfbn)))
+		(setq pcurve '(1 2 3 4)))
 	      ;; Account for set-limits low...
 	      (unless sll (setq sll (lowest-sounding
 				     (player-get-instrument
@@ -66,13 +68,19 @@
 			    when (and (pitch>= p sll)
 				      (pitch<= p slh))
 			    collect p)
-		    new-pitches (funcall chord-fun 1
-					 (if pcurve 
-					     (nth (bar-pos ev) pcurve)
-					     ;; otherwise all chords are the same
-					     (1+ (random 4)))
-					 (if refz refz 1)
-					 1 instrument 1))
+		    new-pitches (funcall chord-fun 1 (if pcurve
+							 (nth (if (bar-pos ev)
+								  (bar-pos ev)
+								  1)
+							      pcurve)
+							 (get-next cl))
+					 ;; otherwise all chords are the same
+					 ;(if refz refz 1)
+					 refz
+					 (get-next cl);1
+					 instrument ;1
+					 (set-ref bar)
+					 ))
 	      ;; Account for ties later
 	      (when (is-tied-to ev) (setf tt t))
 	      (when (is-tied-from ev) (setf tf t))
@@ -86,6 +94,7 @@
 	      (when dyn (setf (amplitude ev) (dynamic-to-amplitude dyn)))
 	      (when mrks (setf (marks ev) mrks))
 	      (when mrks-b4 (setf (marks-before ev) mrks-b4))
+	      (when mc (set-midi-channel ev mc))
 	      ;; Sort ties
 	      (when tt (setf (is-tied-to ev) t))
 	      (when tf (setf (is-tied-from ev) t))
