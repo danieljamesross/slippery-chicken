@@ -162,7 +162,10 @@
 			 ;; DJR Tue 20 Mar 2018 16:27:29 GMT
 			 ;; sound-frames throws an error in clm-5
 			 ;; so let's get rid of it.
-                         ;(sound-frames file)
+			 ;; JA 
+			 ;; You break the conditional then, you need the first bit. Replace sound-frames with sound-samples.
+			 ;;Haven't tested but works fine in clm for samp1.
+                         (sound-samples file)
                          (floor (* *srate* end))))
          ;; The duration (seconds) of the input file, taking into consideration
          ;; whether we're reflecting or not. 
