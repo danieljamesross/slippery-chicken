@@ -39,7 +39,7 @@
 ;;;                   
 ;;;                   GRAIN-ENV: the grain lengths in secs, ranging over the
 ;;;                   length of the output file.  This will be set to
-;;;                  +MIN-GRAIN-LENGTH+ if too small.
+;;;                   +MIN-GRAIN-LENGTH+ if too small.
 ;;;                   
 ;;;                   CENTER-DEVIATION-ENV: the amount by which the grain can
 ;;;                   randomly deviate from the current input sample (which is
@@ -187,7 +187,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(definstrument splinter                 
+(defscins splinter
+;(definstrument splinter                 
     ;;(splinter :c-file "/user/michael/ins/.cins/splinter.c")
     (file time &key
           (channel 0)
